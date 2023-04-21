@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: TARIFF
+      author: turbosith
+      changes:
+        - createTable:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  remarks: Идентификатор строки
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: tariff_pk
+                    nullable: false
+              - column:
+                  name: type
+                  remarks: Тип кредита
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: interest_rate
+                  remarks: Процентная ставка
+                  type: varchar(50)
+                  constraints:
+                    unique: false
+                    nullable: false

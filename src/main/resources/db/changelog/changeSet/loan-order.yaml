@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: LOAN-ORDER
+      author: turbosith
+      changes:
+        - createTable:
+            tableName: loan_order
+            columns:
+              - column:
+                  name: id
+                  remarks: Идентификатор строки
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: loan_order_pk
+                    nullable: false
+              - column:
+                  name: order_id
+                  remarks: Идентификатор заявок
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  remarks: Идентификатор клиента
+                  type: long
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tariff_id
+                  remarks: Идентификатор тарифа
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_loan_order
+                    references: tariff(id)
+              - column:
+                  name: credit_rating
+                  remarks: Кредитный рейтинг
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  remarks: Статус заявки
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_insert
+                  remarks: Время вставки строки
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_update
+                  remarks: Время обновления строки
+                  type: timestamp
+                  constraints:
+                    nullable: false
