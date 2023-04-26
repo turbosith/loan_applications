@@ -1,4 +1,9 @@
 package com.example.loan_applications.service;
 
+import com.example.loan_applications.model.Tariff;
+
+import java.util.List;
+
 public interface TariffService {
+    List<Tariff> findAll();
 }

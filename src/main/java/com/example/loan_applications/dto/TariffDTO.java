@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class TariffDTO {
     private String type;
-    private String interestRate;
+    private String interest_rate;
 }
