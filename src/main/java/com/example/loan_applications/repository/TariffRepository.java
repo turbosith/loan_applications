@@ -2,12 +2,10 @@ package com.example.loan_applications.repository;
 
 
 import com.example.loan_applications.model.Tariff;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TariffRepository {
     private static final String TARIFFS = "SELECT * FROM tariff";
+    private static final String SAVE = "insert into TARIFF (TYPE, INTEREST_RATE) values (?, ?)";
     private final JdbcTemplate jdbcTemplate;
 
     public Optional<List<Tariff>> findAll() {
@@ -23,6 +22,13 @@ public class TariffRepository {
                 TARIFFS,
                 new BeanPropertyRowMapper<>(Tariff.class)
         ));
+    }
+    public int save(Tariff tariff){
+        return jdbcTemplate.update(
+                SAVE,
+                tariff.getType(),
+                tariff.getInterestRate()
+        );
     }
 
 

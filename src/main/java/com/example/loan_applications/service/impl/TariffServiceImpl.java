@@ -1,5 +1,6 @@
 package com.example.loan_applications.service.impl;
 
+import com.example.loan_applications.dto.TariffDTO;
 import com.example.loan_applications.model.Tariff;
 import com.example.loan_applications.repository.TariffRepository;
 import com.example.loan_applications.service.TariffService;
@@ -14,5 +15,13 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public List<Tariff> findAll() {
         return tariffRepository.findAll().orElseThrow();
+    }
+
+    @Override
+    public int save(TariffDTO tariffDTO) {
+        Tariff tariff = new Tariff();
+        tariff.setType(tariff.getType());
+        tariff.setInterestRate(tariffDTO.getInterest_rate());
+        return tariffRepository.save(tariff);
     }
 }
