@@ -1,22 +1,13 @@
 package com.example.loan_applications.controller;
 
-import com.example.loan_applications.dto.LoanOrderDTO;
 import com.example.loan_applications.dto.TariffDTO;
-import com.example.loan_applications.model.Tariff;
 import com.example.loan_applications.model.response.DataResponse;
 import com.example.loan_applications.model.response.DataResponseTariff;
-import com.example.loan_applications.service.LoanOrderService;
 import com.example.loan_applications.service.TariffService;
-import com.example.loan_applications.service.impl.LoanOrderServiceImpl;
-import com.example.loan_applications.service.impl.TariffServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.NotActiveException;
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -28,6 +19,10 @@ public class LoanOrderController {
     @GetMapping("/getTariffs")
     public ResponseEntity<DataResponse> getTariffs(Model model) {
         return ResponseEntity.ok(new DataResponse(new DataResponseTariff(tariffService.findAll())));
+    }
+    @PostMapping ("/addTariff")
+    public ResponseEntity<Integer> addTariff(@RequestBody TariffDTO tariffDTO){
+        return ResponseEntity.ok(tariffService.save(tariffDTO));
     }
 /*
     @GetMapping("/order")
