@@ -1,8 +1,10 @@
 package com.example.loan_applications.controller;
 
 import com.example.loan_applications.dto.TariffDTO;
+import com.example.loan_applications.model.Tariff;
 import com.example.loan_applications.model.response.DataResponse;
 import com.example.loan_applications.model.response.DataResponseTariff;
+import com.example.loan_applications.model.response.DataResponseTariffById;
 import com.example.loan_applications.service.TariffService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +19,24 @@ public class LoanOrderController {
     //private final LoanOrderService loanOrderService;
 
     @GetMapping("/getTariffs")
-    public ResponseEntity<DataResponse> getTariffs(Model model) {
+    public ResponseEntity<DataResponse> getTariffs() {
         return ResponseEntity.ok(new DataResponse(new DataResponseTariff(tariffService.findAll())));
     }
     @PostMapping ("/addTariff")
     public ResponseEntity<Integer> addTariff(@RequestBody TariffDTO tariffDTO){
         return ResponseEntity.ok(tariffService.save(tariffDTO));
     }
+    @GetMapping("/getTariff")
+    public ResponseEntity<DataResponse> getTariff(@RequestParam long id) {
+        return ResponseEntity.ok(new DataResponse(new DataResponseTariffById(tariffService.getById(id))));
+    }
+
 /*
+    @GetMapping("/order")
+    public String newOrder(Model model) {
+        model.addAttribute("order", new LoanOrderDTO());
+        return "";
+    }
     @GetMapping("/order")
     public String newOrder(Model model) {
         model.addAttribute("order", new LoanOrderDTO());

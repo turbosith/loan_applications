@@ -14,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TariffRepository {
     private static final String TARIFFS = "SELECT * FROM tariff";
+    private static final String TARIFF = "SELECT * FROM tariff WHERE id=?";
     private static final String SAVE = "insert into TARIFF (TYPE, INTEREST_RATE) values (?, ?)";
     private final JdbcTemplate jdbcTemplate;
 
@@ -29,6 +30,13 @@ public class TariffRepository {
                 tariff.getType(),
                 tariff.getInterestRate()
         );
+    }
+    public  Optional<Tariff> getById(long id){
+        return Optional.ofNullable((Tariff) jdbcTemplate.queryForObject(
+                TARIFF,
+                new Object[]{id},
+                new BeanPropertyRowMapper<>(Tariff.class)
+        ));
     }
 
 

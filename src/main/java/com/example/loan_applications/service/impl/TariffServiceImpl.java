@@ -24,4 +24,9 @@ public class TariffServiceImpl implements TariffService {
         tariff.setInterestRate(tariffDTO.getInterest_rate());
         return tariffRepository.save(tariff);
     }
+
+    @Override
+    public Tariff getById(long id) {
+        return tariffRepository.getById(id).orElseThrow();
+    }
 }
