@@ -20,7 +20,7 @@ public class TariffServiceImpl implements TariffService {
     @Override
     public int save(TariffDTO tariffDTO) {
         Tariff tariff = new Tariff();
-        tariff.setType(tariff.getType());
+        tariff.setType(tariffDTO.getType());
         tariff.setInterestRate(tariffDTO.getInterest_rate());
         return tariffRepository.save(tariff);
     }
