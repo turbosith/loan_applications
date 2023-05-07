@@ -27,6 +27,7 @@
 1. Создайте H2 базу данных
 
  ![image](https://user-images.githubusercontent.com/93432684/236708581-853613c0-8577-4b26-af45-11e9f8fb8a23.png)
+ 
 2. Установите следующие properties для базы данных
 
  ![image](https://user-images.githubusercontent.com/93432684/236708674-790e4248-f3d7-4120-bdc4-42e7ee7bbcd9.png)
