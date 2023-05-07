@@ -24,6 +24,11 @@
   секунды.
 
 ## Инструкция локального запуска проекта
+1) Создайте H2 базу данных
+![image](https://user-images.githubusercontent.com/93432684/236708581-853613c0-8577-4b26-af45-11e9f8fb8a23.png)
+2)Установите следующие properties для базы данных
+![image](https://user-images.githubusercontent.com/93432684/236708674-790e4248-f3d7-4120-bdc4-42e7ee7bbcd9.png)
+3)База создана
 
 ## Дополнительный функционал
 
@@ -32,3 +37,5 @@
 ## Ссылки
 
 [Задание](https://drive.google.com/file/d/1zett8xUTBs7ZuF3sFCnykGqPkwLFldb4/view)
+[Liquibase](https://www.youtube.com/watch?v=ec90flC2MNg)
+[ExceptionHandler](https://habr.com/ru/articles/528116/)
