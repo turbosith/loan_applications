@@ -1,5 +1,6 @@
 package com.example.loan_applications.controller;
 
+import com.example.loan_applications.dto.ApplicationSubmission;
 import com.example.loan_applications.dto.TariffDTO;
 import com.example.loan_applications.model.Tariff;
 import com.example.loan_applications.model.response.DataResponse;
@@ -31,16 +32,17 @@ public class LoanOrderController {
         return ResponseEntity.ok(new DataResponse(new DataResponseTariffById(tariffService.getById(id))));
     }
 
+
+
 /*
-    @GetMapping("/order")
-    public String newOrder(Model model) {
-        model.addAttribute("order", new LoanOrderDTO());
+@DeleteMapping("/deleteOrder}")
+    public String deleteOrder(Model model) {
         return "";
     }
-    @GetMapping("/order")
-    public String newOrder(Model model) {
-        model.addAttribute("order", new LoanOrderDTO());
-        return "";
+    @PostMapping ("/order")
+    public ResponseEntity<Integer> newOrder(@RequestBody ApplicationSubmission applicationSubmission){
+        return ResponseEntity.ok(tariffService.save(tariffDTO));
+    }
     }
 
     @PostMapping

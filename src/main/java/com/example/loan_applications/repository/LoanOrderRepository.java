@@ -1,5 +1,7 @@
 package com.example.loan_applications.repository;
 
+import com.example.loan_applications.model.LoanOrder;
+import com.example.loan_applications.model.Tariff;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,35 +11,19 @@ import org.springframework.stereotype.Repository;
 @Component
 @RequiredArgsConstructor
 public class LoanOrderRepository {
-
-
-    private static final  String OFFERS = "SELECT * FROM OFFERS";
-    private static final  String OFFERS_BY_ID = "SELECT * FROM OFFERS WHERE USERID = ?";
-    private static final  String SAVE = "insert into OFFERS (HEADING, DESCRIPTION, USERID) values (?, ?, ?)";
+    private static final String SAVE = "insert into LOAN_ORDER (ORDER_ID," +
+            " USER_ID,TARIFF_ID,CREDIT_RATING,STATUS,TIME_INSERT) values (?, ?, ?, ?, ?, ?)";
     private final JdbcTemplate jdbcTemplate;
-   /* public List<OfferEntity> findAll(){
-        return jdbcTemplate.query(
-                OFFERS,
-                new BeanPropertyRowMapper<>(OfferEntity.class)
-        );
-    }
-    public List<OfferEntity> findAllByUserId(Long id){
-        return jdbcTemplate.query(
-                OFFERS_BY_ID,
-                new Object[]{id},
-                new BeanPropertyRowMapper<>(OfferEntity.class)
-        );
-    }
-
-    public OfferEntity save(OfferEntity offer){
-        jdbcTemplate.update(
+    public int save(LoanOrder loanOrder){
+        return jdbcTemplate.update(
                 SAVE,
-                offer.getHeading(),
-                offer.getDescription(),
-                offer.getUser()
-        );
-        return offer;
-    }*/
+                loanOrder.getOrderId(),
+                loanOrder.getUserId(),
+                loanOrder.getTariffId(),
+                loanOrder.getCreditRating(),
+                loanOrder.getStatus(),
+                loanOrder.getTimeInsert()
+        );}
 
 
 }
