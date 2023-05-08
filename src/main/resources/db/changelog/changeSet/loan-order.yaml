@@ -58,5 +58,3 @@ databaseChangeLog:
                   name: time_update
                   remarks: Время обновления строки
                   type: timestamp
-                  constraints:
-                    nullable: false
