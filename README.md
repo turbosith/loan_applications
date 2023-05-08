@@ -45,3 +45,4 @@
 * [Задание](https://drive.google.com/file/d/1zett8xUTBs7ZuF3sFCnykGqPkwLFldb4/view)
 * [Liquibase](https://www.youtube.com/watch?v=ec90flC2MNg)
 * [ExceptionHandler](https://habr.com/ru/articles/528116/)
+* [Scheduler](https://habr.com/ru/articles/580062/)
