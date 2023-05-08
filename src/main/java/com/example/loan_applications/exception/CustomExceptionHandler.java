@@ -6,13 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 @Slf4j
 @RestControllerAdvice
 public class CustomExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseException<DataException> handle(CustomException exception){
-        DataException dataException = new DataException(exception.getCode(),exception.getMessage());
+    public ResponseException<DataException> handle(CustomException exception) {
+        DataException dataException =
+                new DataException(exception.getCode(), exception.getMessage());
         log.error(exception.getMessage(), exception.getCode(), exception);
         return new ResponseException<>(dataException);
     }

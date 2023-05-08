@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface TariffService {
     List<Tariff> findAll();
+
     int save(TariffDTO tariffDTO);
+
     Tariff getById(long id);
 
 }

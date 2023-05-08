@@ -1,9 +1,10 @@
 package com.example.loan_applications.dto;
 
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class ApplicationSubmission {
-    private long userid;
-    private long tariffid;
+    private long userId;
+    private long tariffId;
 }
