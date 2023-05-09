@@ -6,3 +6,28 @@ spring:
     password: root
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
+management:
+  health:
+    circuit-breakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+resilience4j:
+  circuit breaker:
+    instances:
+      fallBack:
+        slowCallRateThreshold: 1
+        slowCallDurationThreshold: 1
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: TIME_BASED
