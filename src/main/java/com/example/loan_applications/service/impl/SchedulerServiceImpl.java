@@ -19,27 +19,30 @@ import java.util.Random;
 @Component
 public class SchedulerServiceImpl implements SchedulerService {
     private final LoanOrderRepository loanOrderRepository;
+
+    /**
+     * Метод рассмотрения заявок
+     */
     @Override
     @Async
     @Scheduled(initialDelay = 1000 * 10, fixedRate = 1000 * 2 * 60)
     public void approvalApplications() {
         List<LoanOrder> loanOrders = loanOrderRepository.findByStatus(StatusEnum.IN_PROGRESS);
-        for (LoanOrder loanOrder:loanOrders){
+        for (LoanOrder loanOrder : loanOrders) {
             Boolean decision = new Random().nextBoolean();
-            if(decision){
+            if (decision) {
                 loanOrderRepository.updateLoanOrder(
                         StatusEnum.APPROVED,
                         new Timestamp(System.currentTimeMillis()),
-                                loanOrder.getId());
-            }
-            else{
+                        loanOrder.getId());
+            } else {
                 loanOrderRepository.updateLoanOrder(
                         StatusEnum.REFUSED,
                         new Timestamp(System.currentTimeMillis()),
-                                loanOrder.getId());
-            }
+                        loanOrder.getId());
             }
         }
-
     }
+
+}
 

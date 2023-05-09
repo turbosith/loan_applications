@@ -21,13 +21,17 @@ public class LoanOrderRepository {
     private static final String SELECT_BY_USERID = "SELECT * FROM loan_order WHERE user_id=?";
     private static final String SELECT_BY_STATUS = "SELECT * FROM loan_order WHERE status=?";
     private static final String DELETE = "DELETE FROM loan_order WHERE order_id=? AND user_id=?";
-    private static final String SELECT_BY_ORDERID="SELECT STATUS FROM loan_order WHERE order_id=?";
-    private final String UPDATE = "update LOAN_ORDER set STATUS = ?, TIME_UPDATE = ? where ID = ?";
+    private static final String SELECT_BY_ORDERID = "SELECT STATUS FROM loan_order WHERE order_id=?";
+    private static final String UPDATE = "update LOAN_ORDER set STATUS = ?, TIME_UPDATE = ? where ID = ?";
     private static final String SELECT_BY_ORDERID_AND_USERID = "SELECT STATUS FROM loan_order WHERE order_id=? AND user_id=?";
     private final JdbcTemplate jdbcTemplate;
 
-    public int save(LoanOrder loanOrder) {
-        return jdbcTemplate.update(
+    /**
+     * Метод добавления заявки
+     * @param loanOrder - заявка
+     */
+    public void save(LoanOrder loanOrder) {
+        jdbcTemplate.update(
                 SAVE,
                 loanOrder.getOrderId(),
                 loanOrder.getUserId(),
@@ -37,6 +41,12 @@ public class LoanOrderRepository {
                 loanOrder.getTimeInsert()
         );
     }
+
+    /**
+     * Метод нахождения по идентификатору пользователя
+     * @param userId - id пользователя
+     * @return - заявки пользователя
+     */
     public List<LoanOrder> findByUserId(long userId) {
         return jdbcTemplate.query(
                 SELECT_BY_USERID,
@@ -44,6 +54,12 @@ public class LoanOrderRepository {
                 userId
         );
     }
+
+    /**
+     * Метод получения заявок по статусу
+     * @param statusEnum - статус заявки
+     * @return - заявки с определенным статусом
+     */
     public List<LoanOrder> findByStatus(StatusEnum statusEnum) {
         return jdbcTemplate.query(
                 SELECT_BY_STATUS,
@@ -52,36 +68,49 @@ public class LoanOrderRepository {
         );
     }
 
-
+    /**
+     * Метод получения статуса заявки
+     * @param orderId - идентификатор заяки
+     * @return - статус
+     */
     public Optional<GetOrderStatusSuccess> getStatusByOrderId(String orderId) {
-        try{
-        return Optional.ofNullable(jdbcTemplate.queryForObject(
-                SELECT_BY_ORDERID,
-                GetOrderStatusSuccess.class,
-                orderId
-        ));}
-        catch (EmptyResultDataAccessException exception){
+        try {
+            return Optional.ofNullable(jdbcTemplate.queryForObject(
+                    SELECT_BY_ORDERID,
+                    GetOrderStatusSuccess.class,
+                    orderId
+            ));
+        } catch (EmptyResultDataAccessException exception) {
             return Optional.empty();
         }
     }
 
-
-
+    /**
+     * Метод получения статуса по id пользователя и заявки
+     * @param userId - идентификатор пользователя
+     * @param orderId - идентификатор заявки
+     * @return - статус
+     */
     public Optional<GetOrderStatusSuccess> getStatusByOrderIdAndUserId(long userId, UUID orderId) {
-        try{
+        try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(
                     SELECT_BY_ORDERID_AND_USERID,
                     GetOrderStatusSuccess.class,
                     orderId.toString(),
                     userId
-            ));}
-        catch (EmptyResultDataAccessException exception){
+            ));
+        } catch (EmptyResultDataAccessException exception) {
             return Optional.empty();
         }
     }
 
-    public int deleteByOrderIdAndUserId(long userId, UUID orderId) {
-        return jdbcTemplate.update(
+    /**
+     * Метод удаления заявки
+     * @param userId - идентификатор пользователя
+     * @param orderId - идентификатор заявки
+     */
+    public void deleteByOrderIdAndUserId(long userId, UUID orderId) {
+        jdbcTemplate.update(
                 DELETE,
                 orderId.toString(),
                 userId
@@ -89,8 +118,14 @@ public class LoanOrderRepository {
         );
     }
 
-    public int updateLoanOrder(StatusEnum status, Timestamp timesUpdate, long id) {
-        return jdbcTemplate.update(
+    /**
+     * Изменение статуса заявки
+     * @param status - статус заявки
+     * @param timesUpdate - время изменения заявки
+     * @param id - иденитификатор заявки
+     */
+    public void updateLoanOrder(StatusEnum status, Timestamp timesUpdate, long id) {
+        jdbcTemplate.update(
                 UPDATE,
                 status.toString(),
                 timesUpdate,

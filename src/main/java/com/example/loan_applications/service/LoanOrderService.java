@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface LoanOrderService {
     LoanOrderSuccess add(ApplicationSubmission applicationSubmission);
+
     Optional<GetOrderStatusSuccess> getStatus(String orderId);
 
     void delete(DeleteOrder deleteOrder);

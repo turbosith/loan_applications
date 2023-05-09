@@ -22,7 +22,7 @@ resilience4j:
   circuit breaker:
     instances:
       fallBack:
-        slowCallRateThreshold: 1
+        slowCallRateThreshold: 80
         slowCallDurationThreshold: 1
         failureRateThreshold: 50
         minimumNumberOfCalls: 5

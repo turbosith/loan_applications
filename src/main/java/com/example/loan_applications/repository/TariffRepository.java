@@ -15,10 +15,14 @@ import java.util.Optional;
 public class TariffRepository {
     private static final String TARIFFS = "SELECT * FROM tariff";
     private static final String EXISTS = "SELECT EXISTS(SELECT * FROM tariff WHERE id=?)";
-    private static final String  TARIFF = "SELECT * FROM tariff WHERE id=?";
+    private static final String TARIFF = "SELECT * FROM tariff WHERE id=?";
     private static final String SAVE = "insert into TARIFF (TYPE, INTEREST_RATE) values (?, ?)";
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * Метод полученяи всех тарифов
+     * @return - список тарифов
+     */
     public Optional<List<Tariff>> findAll() {
         return Optional.of(jdbcTemplate.query(
                 TARIFFS,
@@ -26,6 +30,11 @@ public class TariffRepository {
         ));
     }
 
+    /**
+     * метод сохранения тарифа
+     * @param tariff - тариф
+     * @return - результат
+     */
     public int save(Tariff tariff) {
         return jdbcTemplate.update(
                 SAVE,
@@ -34,6 +43,11 @@ public class TariffRepository {
         );
     }
 
+    /**
+     * Получение тарифа по id
+     * @param id -идентификатор тарифа
+     * @return - тариф
+     */
     public Optional<Tariff> getById(long id) {
         return Optional.ofNullable(jdbcTemplate.queryForObject(
                 TARIFF,
@@ -41,8 +55,14 @@ public class TariffRepository {
                 new BeanPropertyRowMapper<>(Tariff.class)
         ));
     }
-    public Boolean existsById(long tariffId){
-        return jdbcTemplate.queryForObject(EXISTS,Boolean.class,tariffId);
+
+    /**
+     * Получение наличия тарифа
+     * @param tariffId - идентификатор тарифа
+     * @return - наличие тарифа
+     */
+    public Boolean existsById(long tariffId) {
+        return jdbcTemplate.queryForObject(EXISTS, Boolean.class, tariffId);
     }
 
 
