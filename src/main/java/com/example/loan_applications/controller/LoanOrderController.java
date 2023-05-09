@@ -1,6 +1,7 @@
 package com.example.loan_applications.controller;
 
 import com.example.loan_applications.dto.ApplicationSubmission;
+import com.example.loan_applications.dto.DeleteOrder;
 import com.example.loan_applications.dto.LoanOrderSuccess;
 import com.example.loan_applications.dto.TariffDTO;
 import com.example.loan_applications.model.response.DataResponse;
@@ -41,14 +42,14 @@ public class LoanOrderController {
     public ResponseEntity<DataResponse> getStatus(@RequestParam String orderId) {
         return ResponseEntity.ok(new DataResponse(loanOrderService.getStatus(orderId)));
     }
+    @DeleteMapping("/deleteOrder")
+    public void deleteOrder(@RequestBody DeleteOrder deleteOrder) {
+        loanOrderService.delete(deleteOrder);
+    }
 
 
 
 /*
-@DeleteMapping("/deleteOrder}")
-    public String deleteOrder(Model model) {
-        return "";
-    }
     @PostMapping ("/order")
     public ResponseEntity<Integer> newOrder(@RequestBody ApplicationSubmission applicationSubmission){
         return ResponseEntity.ok(tariffService.save(tariffDTO));
