@@ -3,11 +3,13 @@ package com.example.loan_applications.repository;
 import com.example.loan_applications.dto.GetOrderStatusSuccess;
 import com.example.loan_applications.model.LoanOrder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -37,11 +39,15 @@ public class LoanOrderRepository {
     }
 
 
-    public LoanOrder getStatusByOrderId(String orderId) {
-        return jdbcTemplate.queryForObject(
+    public Optional<GetOrderStatusSuccess> getStatusByOrderId(String orderId) {
+        try{
+        return Optional.ofNullable(jdbcTemplate.queryForObject(
                 SELECT_BY_ORDERID,
-                new Object[]{orderId},
-                new BeanPropertyRowMapper<>(LoanOrder.class)
-        );
+                GetOrderStatusSuccess.class,
+                orderId
+        ));}
+        catch (EmptyResultDataAccessException exception){
+            return Optional.empty();
+        }
     }
 }

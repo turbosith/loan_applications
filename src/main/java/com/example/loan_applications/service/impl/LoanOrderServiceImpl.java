@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -58,7 +59,11 @@ public class LoanOrderServiceImpl implements LoanOrderService {
     }
 
     @Override
-    public GetOrderStatusSuccess getStatus(String orderId) {
-        return new GetOrderStatusSuccess(loanOrderRepository.getStatusByOrderId(orderId).getStatus().toString());
+    public Optional<GetOrderStatusSuccess> getStatus(String orderId) {
+
+        return Optional.ofNullable(loanOrderRepository
+                .getStatusByOrderId(orderId).orElseThrow(()
+                        -> new CustomException("ORDER_NOT_FOUND", "Заявка не найдена")));
+
     }
 }

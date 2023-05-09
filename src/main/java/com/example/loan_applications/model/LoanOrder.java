@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 import com.example.loan_applications.constants.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class LoanOrder {
     private long id;
     private String orderId;

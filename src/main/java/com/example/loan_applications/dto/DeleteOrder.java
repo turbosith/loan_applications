@@ -6,6 +6,6 @@ import java.util.UUID;
 
 @Data
 public class DeleteOrder {
-    private long userid;
-    private UUID orderid;
+    private long userId;
+    private UUID orderId;
 }
