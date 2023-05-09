@@ -1,11 +1,11 @@
 package com.example.loan_applications.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.UUID;
 
-@Data
+@Getter
 public class DeleteOrder {
-    private long userid;
-    private UUID orderid;
+    private long userId;
+    private UUID orderId;
 }

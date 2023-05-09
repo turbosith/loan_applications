@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class CustomExceptionHandler {
+    /**
+     * Метод, который перехватывает ошибку
+     * @param exception - ошибка
+     * @return - данные обошибке
+     */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseException<DataException> handle(CustomException exception) {
